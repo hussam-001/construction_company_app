@@ -41,11 +41,11 @@ class MyApp extends StatelessWidget {
           ),
         ),
         disabledColor: Colors.black,
-        iconTheme: const IconThemeData(color: kPrimaryColor, opacity: 0.8),
+        iconTheme: const IconThemeData(color: kPrimaryColor),
         primaryIconTheme: const IconThemeData(
-          color: kPrimaryColor,
-          opacity: 0.8,
+          color: kPrimaryColor
         ),
+        primaryColor: kPrimaryColor
       ),
       home: const HomeScreen(),
     );

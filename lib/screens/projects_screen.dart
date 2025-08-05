@@ -1,4 +1,5 @@
 import 'package:construction_company_app/constants.dart';
+import 'package:construction_company_app/screens/project_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProjectsScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(title: Text("Projects")),
-      body: projects.length > 0
+      body: projects.isNotEmpty
           ? ListView(
               children: projects.map((dynamic project) {
                 return Container(
@@ -61,14 +62,14 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                     borderRadius: BorderRadius.circular(20),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(20),
-                      onLongPress: () {},
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => AddAddress(
-                        //           address: address,
-                        //         )));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetailsScreen(projectId: project["id"]),
+                          ),
+                        );
                       },
                       child: Directionality(
                         textDirection: TextDirection.ltr,
@@ -139,7 +140,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                                 backgroundColor: Color(0x50ffffff),
                               ),
                               Text(
-                                '${project["progress_percentage"]}' + "%",
+                                '${project["progress_percentage"]}%',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
