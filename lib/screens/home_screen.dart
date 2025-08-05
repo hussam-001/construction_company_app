@@ -1,4 +1,5 @@
 import 'package:construction_company_app/constants.dart';
+import 'package:construction_company_app/screens/news_screen.dart';
 import 'package:construction_company_app/screens/projects_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final List<Widget> screens = <Widget>[
       ProjectsScreen(),
-      ProjectsScreen(),
+      NewsScreen(),
       ProjectsScreen(),
       ProjectsScreen(),
     ];
