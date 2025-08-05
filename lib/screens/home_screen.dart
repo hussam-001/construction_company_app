@@ -1,5 +1,7 @@
 import 'package:construction_company_app/constants.dart';
+import 'package:construction_company_app/screens/my_account_screen.dart';
 import 'package:construction_company_app/screens/news_screen.dart';
+import 'package:construction_company_app/screens/notifications_screen.dart';
 import 'package:construction_company_app/screens/projects_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<Widget> screens = <Widget>[
       ProjectsScreen(),
       NewsScreen(),
-      ProjectsScreen(),
-      ProjectsScreen(),
+      NotificationsScreen(),
+      MyAccountScreen(),
     ];
 
     return Scaffold(
