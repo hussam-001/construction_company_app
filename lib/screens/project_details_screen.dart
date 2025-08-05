@@ -1,5 +1,6 @@
 import 'package:construction_company_app/components/project_detail_item.dart';
 import 'package:construction_company_app/constants.dart';
+import 'package:construction_company_app/screens/bills_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
@@ -41,12 +42,12 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
         padding: const EdgeInsets.all(20),
         child: ElevatedButton(
           onPressed: () {
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => BillsScreen(
-            //           projectId: widget.projectId,
-            //         )));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BillsScreen(projectId: widget.projectId),
+              ),
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: kPrimaryColor,
