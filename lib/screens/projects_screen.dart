@@ -1,3 +1,4 @@
+import 'package:construction_company_app/api/project_api.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:construction_company_app/screens/project_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,41 +11,25 @@ class ProjectsScreen extends StatefulWidget {
 }
 
 class _ProjectsScreenState extends State<ProjectsScreen> {
-  List projects = [
-    {
-      "id": 1,
-      "main_image": "https://picsum.photos/200",
-      "main_title": "Massa Plaza",
-      "marketing_description": "Mall In Midan",
-      "address": "Damascus - Midan",
-      "expected_date_of_completed": "2022-01-01",
-      "progress_percentage": 50,
-    },
-    {
-      "id": 2,
-      "main_image": "https://picsum.photos/200",
-      "main_title": "Massa Plaza 2",
-      "marketing_description": "Mall In Midan",
-      "address": "Damascus - Midan",
-      "expected_date_of_completed": "2022-01-01",
-      "progress_percentage": 20,
-    },
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    // TODO: implement initState
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(title: Text("Projects")),
-      body: projects.isNotEmpty
-          ? ListView(
-              children: projects.map((dynamic project) {
+      body: FutureBuilder(
+        future: getProjects(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No data available.'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final project = snapshot.data![index];
                 return Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   decoration: BoxDecoration(
@@ -153,15 +138,11 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                     ),
                   ),
                 );
-              }).toList(),
-            )
-          : Center(
-              child: Text(
-                "No Projects",
-                style: TextStyle(fontSize: 20, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-            ),
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }

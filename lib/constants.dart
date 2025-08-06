@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const String kApiBaseUrl = 'http://10.0.2.2:8000';
 const kDarkColor = Color(0xFF222222);
 const kPrimaryColor = Color(0xFFf0ca05);
 const kSecondaryColor = Color(0xFF5fabe4);
