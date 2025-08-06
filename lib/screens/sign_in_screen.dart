@@ -23,15 +23,22 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() {
         showSpinner = true;
       });
-      await signIn(email, password);
-      setState(() {
-        showSpinner = false;
-      });
-      Navigator.of(context).popUntil((route) => route.isFirst);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+      try {
+        await signIn(email, password);
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      } catch (e) {
+        setState(() {
+          errorMessage = e.toString();
+        });
+      } finally {
+        setState(() {
+          showSpinner = false;
+        });
+      }
     }
   }
 

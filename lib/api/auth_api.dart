@@ -28,3 +28,11 @@ Future<void> signOut() async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.remove(userTokenCacheKey);
 }
+
+Future<dynamic> changePassword(String password, String newPassword) async {
+  final response = await http.post(
+    parseEndpoint('/client/changePassword'),
+    body: {'password': password, 'new_password': newPassword},
+  );
+  return processResponse(response);
+}

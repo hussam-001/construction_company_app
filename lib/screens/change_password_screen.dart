@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:construction_company_app/api/auth_api.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +14,7 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   bool showSpinner = false;
   String password = '';
-  String passwordConfirmation = '';
+  String newPassword = '';
   String? errorMessage;
 
   final _formKey = GlobalKey<FormState>();
@@ -21,11 +24,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       setState(() {
         showSpinner = true;
       });
-      await Future.delayed(const Duration(seconds: 1));
-      setState(() {
-        showSpinner = false;
-      });
-      Navigator.pop(context);
+      try {
+        await changePassword(password, newPassword);
+        Navigator.pop(context);
+      } catch (e) {
+        setState(() {
+          errorMessage = e.toString();
+        });
+      } finally {
+        setState(() {
+          showSpinner = false;
+        });
+      }
     }
   }
 
@@ -82,7 +92,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               password = value;
                             },
                             decoration: kTextFieldDecoration.copyWith(
-                              labelText: "Password",
+                              labelText: "Current Password",
                               prefixIcon: const Icon(Icons.lock),
                             ),
                             validator: (value) {
@@ -97,10 +107,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             textDirection: TextDirection.ltr,
                             obscureText: true,
                             onChanged: (value) {
-                              passwordConfirmation = value;
+                              newPassword = value;
                             },
                             decoration: kTextFieldDecoration.copyWith(
-                              labelText: "Password Confirmation",
+                              labelText: "New Password",
                               prefixIcon: const Icon(Icons.lock),
                             ),
                             validator: (value) {
