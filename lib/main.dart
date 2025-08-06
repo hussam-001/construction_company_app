@@ -43,10 +43,8 @@ class MyApp extends StatelessWidget {
         ),
         disabledColor: Colors.black,
         iconTheme: const IconThemeData(color: kPrimaryColor),
-        primaryIconTheme: const IconThemeData(
-          color: kPrimaryColor
-        ),
-        primaryColor: kPrimaryColor
+        primaryIconTheme: const IconThemeData(color: kPrimaryColor),
+        primaryColor: kPrimaryColor,
       ),
       home: AuthGuard(child: HomeScreen()),
     );
