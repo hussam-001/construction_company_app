@@ -1,3 +1,4 @@
+import 'package:construction_company_app/components/auth_guard_component.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:construction_company_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         ),
         primaryColor: kPrimaryColor
       ),
-      home: const HomeScreen(),
+      home: AuthGuard(child: HomeScreen()),
     );
   }
 }

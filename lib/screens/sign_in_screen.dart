@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:construction_company_app/api/auth_api.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:construction_company_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() {
         showSpinner = true;
       });
-      await Future.delayed(const Duration(seconds: 1));
+      await signIn(email, password);
       setState(() {
         showSpinner = false;
       });

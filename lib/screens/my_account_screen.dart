@@ -1,3 +1,4 @@
+import 'package:construction_company_app/api/auth_api.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:construction_company_app/screens/change_password_screen.dart';
 import 'package:construction_company_app/screens/sign_in_screen.dart';
@@ -11,6 +12,15 @@ class MyAccountScreen extends StatefulWidget {
 }
 
 class _MyAccountScreenState extends State<MyAccountScreen> {
+  void handleSignOut() async {
+    await signOut();
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SignInScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,17 +96,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             foregroundColor: Colors.white,
                             minimumSize: Size.fromHeight(40),
                           ),
-                          onPressed: () {
-                            Navigator.of(
-                              context,
-                            ).popUntil((route) => route.isFirst);
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignInScreen(),
-                              ),
-                            );
-                          },
+                          onPressed: handleSignOut,
                           child: Text(
                             "Sign Out",
                             style: TextStyle(
