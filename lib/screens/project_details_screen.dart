@@ -1,3 +1,4 @@
+import 'package:construction_company_app/api/project_api.dart';
 import 'package:construction_company_app/components/project_detail_item.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:construction_company_app/screens/bills_screen.dart';
@@ -12,21 +13,6 @@ class ProjectDetailsScreen extends StatefulWidget {
 }
 
 class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
-  Map projectData = {
-    "first_payment_amount": "100000.00",
-    "first_payment_date": "2025-07-28",
-    "model": "A",
-    "price": "1000000.00",
-    "space": 2,
-    "description":
-        "Alias odio iusto ipsam eos. Illum sint id non sed quia aut consequatur.",
-    "number_of_rooms": 3,
-    "number_of_bathrooms": 3,
-    "direction": "south",
-    "diagram_image":
-        "http://127.0.0.1:8000/storage/property-books/5316b805-1ca5-4093-a1ec-5283b8c67bed.jpg",
-  };
-
   @override
   void initState() {
     super.initState();
@@ -65,47 +51,61 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          spacing: 48,
-          children: [
-            ProjectDetailItem(
-              icon: Icons.attach_money,
-              label: "Price",
-              value: "${projectData["price"]}",
-            ),
-            ProjectDetailItem(
-              icon: Icons.square_foot,
-              label: "Space",
-              value: "${projectData["space"]}",
-            ),
-            ProjectDetailItem(
-              icon: Icons.description,
-              label: "Description",
-              value: "${projectData["description"]}",
-            ),
-            ProjectDetailItem(
-              icon: Icons.meeting_room,
-              label: "Number Of Rooms",
-              value: "${projectData["number_of_rooms"]}",
-            ),
-            ProjectDetailItem(
-              icon: Icons.bathtub_rounded,
-              label: "Number Of Bathrooms",
-              value: "${projectData["number_of_bathrooms"]}",
-            ),
-            ProjectDetailItem(
-              icon: Icons.explore,
-              label: "Direction",
-              value: "${projectData["direction"]}",
-            ),
-            ProjectDetailItem(
-              icon: Icons.confirmation_num,
-              label: "Unit Number",
-              value: "${widget.projectId}",
-            ),
-          ],
-        ),
+      body: FutureBuilder(
+        future: getProjectDetails(widget.projectId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData) {
+            return Center(child: Text('No data available.'));
+          } else {
+            final projectData = snapshot.data!;
+            return SingleChildScrollView(
+              child: Column(
+                spacing: 48,
+                children: [
+                  ProjectDetailItem(
+                    icon: Icons.attach_money,
+                    label: "Price",
+                    value: "${projectData["price"]}",
+                  ),
+                  ProjectDetailItem(
+                    icon: Icons.square_foot,
+                    label: "Space",
+                    value: "${projectData["space"]}",
+                  ),
+                  ProjectDetailItem(
+                    icon: Icons.description,
+                    label: "Description",
+                    value: "${projectData["description"]}",
+                  ),
+                  ProjectDetailItem(
+                    icon: Icons.meeting_room,
+                    label: "Number Of Rooms",
+                    value: "${projectData["number_of_rooms"]}",
+                  ),
+                  ProjectDetailItem(
+                    icon: Icons.bathtub_rounded,
+                    label: "Number Of Bathrooms",
+                    value: "${projectData["number_of_bathrooms"]}",
+                  ),
+                  ProjectDetailItem(
+                    icon: Icons.explore,
+                    label: "Direction",
+                    value: "${projectData["direction"]}",
+                  ),
+                  ProjectDetailItem(
+                    icon: Icons.confirmation_num,
+                    label: "Unit Number",
+                    value: "${widget.projectId}",
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
   }

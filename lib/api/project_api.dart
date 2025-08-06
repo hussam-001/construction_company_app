@@ -14,3 +14,14 @@ Future<List<dynamic>> getProjects() async {
   return processResponse(response);
 }
 
+Future<dynamic> getProjectDetails(int projectId) async {
+  final token = await getUserToken();
+  final response = await http.get(
+    parseEndpoint('/client/projects/$projectId'),
+    headers: {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    },
+  );
+  return processResponse(response);
+}
