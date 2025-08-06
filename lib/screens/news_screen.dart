@@ -1,3 +1,4 @@
+import 'package:construction_company_app/api/news_api.dart';
 import 'package:flutter/material.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -8,37 +9,25 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  List projectNewsList = [
-    {
-      "id": 1,
-      "description": "news 1",
-      "file_url": "https://picsum.photos/200",
-      "created_at": "2022-01-01",
-      "main_title": "Massa Plaza",
-    },
-    {
-      "id": 2,
-      "description": "news 2",
-      "file_url": "https://picsum.photos/200",
-      "created_at": "2022-01-01",
-      "main_title": "Massa Plaza",
-    },
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    // TODO: implement initState
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(title: Text("News")),
-      body: projectNewsList.isNotEmpty
-          ? ListView(
-              children: projectNewsList.map((dynamic projectNews) {
+      body: FutureBuilder(
+        future: getNews(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No data available.'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final projectNews = snapshot.data![index];
                 return Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   decoration: BoxDecoration(
@@ -123,15 +112,11 @@ class _NewsScreenState extends State<NewsScreen> {
                     ),
                   ),
                 );
-              }).toList(),
-            )
-          : Center(
-              child: Text(
-                "No News",
-                style: TextStyle(fontSize: 20, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-            ),
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }
