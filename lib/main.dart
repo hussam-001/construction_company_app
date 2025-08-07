@@ -2,8 +2,12 @@ import 'package:construction_company_app/components/auth_guard_component.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:construction_company_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = kStripePublishableKey;
+
   runApp(const MyApp());
 }
 

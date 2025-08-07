@@ -1,4 +1,5 @@
 import 'package:construction_company_app/constants.dart';
+import 'package:construction_company_app/screens/payment_screen.dart';
 import 'package:flutter/material.dart';
 
 class UnPaidBillComponent extends StatelessWidget {
@@ -113,7 +114,14 @@ class UnPaidBillComponent extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentScreen(billId: bill["id"]),
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: kDarkColor,
                 foregroundColor: Colors.white,
