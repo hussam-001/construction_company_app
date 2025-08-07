@@ -86,25 +86,25 @@ class _NewsScreenState extends State<NewsScreen> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.favorite_outline),
-                                    color: Colors.white,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.comment_outlined),
-                                    color: Colors.white,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.share_outlined),
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
+                              // Row(
+                              //   children: [
+                              //     IconButton(
+                              //       onPressed: () {},
+                              //       icon: Icon(Icons.favorite_outline),
+                              //       color: Colors.white,
+                              //     ),
+                              //     IconButton(
+                              //       onPressed: () {},
+                              //       icon: Icon(Icons.comment_outlined),
+                              //       color: Colors.white,
+                              //     ),
+                              //     IconButton(
+                              //       onPressed: () {},
+                              //       icon: Icon(Icons.share_outlined),
+                              //       color: Colors.white,
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
                         ),

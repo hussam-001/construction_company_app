@@ -30,7 +30,7 @@ Future<void> signOut() async {
 }
 
 Future<dynamic> changePassword(String password, String newPassword) async {
-  final response = await http.post(
+  final response = await http.patch(
     parseEndpoint('/client/changePassword'),
     body: {'password': password, 'new_password': newPassword},
   );
