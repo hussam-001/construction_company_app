@@ -28,12 +28,12 @@ Future<List<dynamic>> getPaidBills(int projectId) async {
 
 Future<dynamic> getProjectBills(int projectId) async {
   final unpaidBills = await getUnpaidBills(projectId);
-  final paidBills = await getProjectBills(projectId);
+  final paidBills = await getPaidBills(projectId);
   final allBills = [...paidBills, ...unpaidBills];
 
   allBills.sort((dynamic a, dynamic b) {
-    DateTime dateA = DateTime.parse(a["deadline"]);
-    DateTime dateB = DateTime.parse(b["deadline"]);
+    DateTime dateA = DateTime.parse(a["due_date"]);
+    DateTime dateB = DateTime.parse(b["due_date"]);
     return dateA.compareTo(dateB);
   });
 

@@ -19,63 +19,67 @@ class PaidBillComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "الدفعة ${bill["id"]}",
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      "${bill["cost"]}",
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: kSuccessColor,
-                      ),
-                    ),
-                    Text(
-                      "${bill["date_of_payment"]}",
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Chip(
-                      label: const Text(
-                        "MONTHLY",
-                        style: TextStyle(
-                          color: kSecondaryColor,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "الدفعة ${bill["id"]}",
+                        style: const TextStyle(
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
-                      backgroundColor: Color(0xFFe4f2fc),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                    ),
-                    Chip(
-                      label: const Text(
-                        "PAID",
+                      Text(
+                        "${bill["property_book_bill_id"]["amount"]}",
                         style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
                           color: kSuccessColor,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      backgroundColor: Color(0xFFe9f3ea),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
+                      Text(
+                        "${bill["due_date"]}",
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Chip(
+                        label: const Text(
+                          "MONTHLY",
+                          style: TextStyle(
+                            color: kSecondaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color(0xFFe4f2fc),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                      ),
+                      Chip(
+                        label: const Text(
+                          "PAID",
+                          style: TextStyle(
+                            color: kSuccessColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color(0xFFe9f3ea),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

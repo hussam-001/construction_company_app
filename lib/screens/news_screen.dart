@@ -78,7 +78,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                     color: Colors.white,
                                   ),
                                   Text(
-                                    projectNews["created_at"],
+                                    "${projectNews["created_at"]}",
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,

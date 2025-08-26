@@ -35,7 +35,7 @@ class UnPaidBillComponent extends StatelessWidget {
   final Map bill;
   @override
   Widget build(BuildContext context) {
-    final monthsDue = calculateDueInMonths(bill["deadline"]);
+    final monthsDue = calculateDueInMonths(bill["due_date"]);
     return Card(
       color: Colors.white,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -48,67 +48,71 @@ class UnPaidBillComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "الدفعة ${bill["id"]}",
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "الدفعة ${bill["id"]}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "${bill["cost"]}",
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: kSuccessColor,
+                      Text(
+                        "${bill["property_book_bill_id"]["amount"]}",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: kSuccessColor,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "${bill["deadline"]}",
-                      style: TextStyle(fontSize: 18, color: kDangerColor),
-                    ),
-                    Text(
-                      "Due in: $monthsDue month",
-                      style: const TextStyle(fontSize: 18, color: Colors.grey),
-                    ),
-                  ],
+                      Text(
+                        "${bill["due_date"]}",
+                        style: TextStyle(fontSize: 18, color: kDangerColor),
+                      ),
+                      Text(
+                        "Due in: $monthsDue month",
+                        style: const TextStyle(fontSize: 18, color: Colors.grey),
+                      ),
+                    ],
+                  ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Chip(
-                      label: const Text(
-                        "MONTHLY",
-                        style: TextStyle(
-                          color: kSecondaryColor,
-                          fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Chip(
+                        label: const Text(
+                          "MONTHLY",
+                          style: TextStyle(
+                            color: kSecondaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color(0xFFe4f2fc),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
                         ),
                       ),
-                      backgroundColor: Color(0xFFe4f2fc),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                    ),
-                    Chip(
-                      label: const Text(
-                        "UNPAID",
-                        style: TextStyle(
-                          color: kDangerColor,
-                          fontWeight: FontWeight.bold,
+                      Chip(
+                        label: const Text(
+                          "UNPAID",
+                          style: TextStyle(
+                            color: kDangerColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color(0xFFfbe7e7),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
                         ),
                       ),
-                      backgroundColor: Color(0xFFfbe7e7),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

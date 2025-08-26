@@ -66,7 +66,7 @@ class _BillsScreenState extends State<BillsScreen> {
                   children: snapshot.data!["allBills"].map<Widget>((
                     dynamic bill,
                   ) {
-                    return bill["date_of_payment"] != null
+                    return bill["is_paid"]
                         ? PaidBillComponent(bill: bill)
                         : UnPaidBillComponent(bill: bill);
                   }).toList(),
