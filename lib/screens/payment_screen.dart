@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key, required this.billId});
+  const PaymentScreen({super.key, required this.projectId, required this.billId});
 
   final int billId;
+  final int projectId;
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
@@ -28,6 +29,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
       final token = await createCardToken(_card!);
       await doPayment(widget.billId, token.id);
       Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => BillsScreen(projectId: widget.projectId)),
+      );
     } catch (e) {
       setState(() {
         errorMessage = e.toString();

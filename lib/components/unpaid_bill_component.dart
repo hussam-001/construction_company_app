@@ -3,7 +3,11 @@ import 'package:construction_company_app/screens/payment_screen.dart';
 import 'package:flutter/material.dart';
 
 class UnPaidBillComponent extends StatelessWidget {
-  const UnPaidBillComponent({super.key, required this.bill});
+  const UnPaidBillComponent({
+    super.key,
+    required this.bill,
+    required this.onPay,
+  });
 
   int calculateDueInMonths(String deadline) {
     try {
@@ -32,6 +36,7 @@ class UnPaidBillComponent extends StatelessWidget {
     }
   }
 
+  final VoidCallback onPay;
   final Map bill;
   @override
   Widget build(BuildContext context) {
@@ -74,7 +79,10 @@ class UnPaidBillComponent extends StatelessWidget {
                       ),
                       Text(
                         "Due in: $monthsDue month",
-                        style: const TextStyle(fontSize: 18, color: Colors.grey),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey,
+                        ),
                       ),
                     ],
                   ),
@@ -118,14 +126,7 @@ class UnPaidBillComponent extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentScreen(billId: bill["id"]),
-                  ),
-                );
-              },
+              onPressed: onPay,
               style: ElevatedButton.styleFrom(
                 backgroundColor: kDarkColor,
                 foregroundColor: Colors.white,

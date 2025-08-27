@@ -9,6 +9,7 @@ Future<List<dynamic>> getUnpaidBills(int projectId) async {
     headers: {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
   );
   return processResponse(response);
@@ -21,6 +22,7 @@ Future<List<dynamic>> getPaidBills(int projectId) async {
     headers: {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
   );
   return processResponse(response);

@@ -37,6 +37,7 @@ dependencies:
   http: ^1.4.0
   shared_preferences: ^2.5.3
   flutter_stripe: ^11.5.0
+  fluttertoast: ^8.2.12
 
 dev_dependencies:
   flutter_test:

@@ -12,12 +12,12 @@ Future<TokenData> createCardToken(CardFieldInputDetails card) async {
   return token;
 }
 
-Future<List<dynamic>> doPayment(int billId, String stripeToken) async {
+Future<dynamic> doPayment(int billId, String stripeToken) async {
   final token = await getUserToken();
   final response = await http.post(
     parseEndpoint('/client/doPayments/$billId'),
     body: {'stripe_token': stripeToken},
-    headers: {'Authorization': 'Bearer $token'},
+    headers: {'Authorization': 'Bearer $token', 'Accept': 'application/json'},
   );
   return processResponse(response);
 }

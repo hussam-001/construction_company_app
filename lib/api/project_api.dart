@@ -9,6 +9,7 @@ Future<List<dynamic>> getProjects() async {
     headers: {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
   );
   return processResponse(response);
@@ -21,6 +22,7 @@ Future<dynamic> getProjectDetails(int projectId) async {
     headers: {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
   );
   return processResponse(response);

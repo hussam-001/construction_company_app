@@ -4,10 +4,10 @@ import 'package:construction_company_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = kStripePublishableKey;
-
+  await Stripe.instance.applySettings();
   runApp(const MyApp());
 }
 

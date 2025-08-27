@@ -2,6 +2,7 @@ import 'package:construction_company_app/api/bills_api.dart';
 import 'package:construction_company_app/components/paid_bill_component.dart';
 import 'package:construction_company_app/components/unpaid_bill_component.dart';
 import 'package:construction_company_app/constants.dart';
+import 'package:construction_company_app/screens/payment_screen.dart';
 import 'package:flutter/material.dart';
 
 class BillsScreen extends StatefulWidget {
@@ -13,6 +14,14 @@ class BillsScreen extends StatefulWidget {
 }
 
 class _BillsScreenState extends State<BillsScreen> {
+  void handlePay(billId) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PaymentScreen(billId: billId, projectId: widget.projectId)),
+    );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -68,7 +77,10 @@ class _BillsScreenState extends State<BillsScreen> {
                   ) {
                     return bill["is_paid"]
                         ? PaidBillComponent(bill: bill)
-                        : UnPaidBillComponent(bill: bill);
+                        : UnPaidBillComponent(
+                            bill: bill,
+                            onPay: () => handlePay(bill["id"]),
+                          );
                   }).toList(),
                 ),
                 ListView(
@@ -82,7 +94,10 @@ class _BillsScreenState extends State<BillsScreen> {
                   children: snapshot.data!["unpaidBills"].map<Widget>((
                     dynamic bill,
                   ) {
-                    return UnPaidBillComponent(bill: bill);
+                    return UnPaidBillComponent(
+                      bill: bill,
+                      onPay: () => handlePay(bill["id"]),
+                    );
                   }).toList(),
                 ),
               ],

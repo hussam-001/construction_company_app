@@ -18,6 +18,7 @@ Future<dynamic> signIn(String email, String password) async {
   final response = await http.post(
     parseEndpoint('/client/login'),
     body: {'email': email, 'password': password},
+    headers: {'Accept': 'application/json'},
   );
   final data = processResponse(response);
   await saveUserToken(data['token']);
@@ -33,6 +34,7 @@ Future<dynamic> changePassword(String password, String newPassword) async {
   final response = await http.patch(
     parseEndpoint('/client/changePassword'),
     body: {'password': password, 'new_password': newPassword},
+    headers: {'Accept': 'application/json'},
   );
   return processResponse(response);
 }

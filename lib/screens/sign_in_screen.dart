@@ -31,9 +31,9 @@ class _SignInScreenState extends State<SignInScreen> {
           MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       } catch (e) {
-        setState(() {
-          errorMessage = e.toString();
-        });
+        // setState(() {
+        //   errorMessage = e.toString();
+        // });
       } finally {
         setState(() {
           showSpinner = false;
