@@ -84,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade500,
+                  color: Colors.grey.shade100,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
