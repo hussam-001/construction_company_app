@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String kApiBaseUrl = 'http://10.0.2.2:8000';
+const String kApiBaseUrl = 'https://reliance-ghana-nothing-dennis.trycloudflare.com';
 const kStripePublishableKey = "pk_test_51PYBWYEHNPXRJDcCFN2ptmqDupVyU2oEuzaCSpaoJKy9dQRutoiqkCLPOVjhAltgqqESS6WpPugmGcuinfUbt3MZ00D1AYyE0m";
 const kDarkColor = Color(0xFF222222);
 const kPrimaryColor = Color(0xFFf0ca05);

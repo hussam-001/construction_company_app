@@ -2,6 +2,7 @@ import 'package:construction_company_app/api/auth_api.dart';
 import 'package:construction_company_app/constants.dart';
 import 'package:construction_company_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -24,16 +25,25 @@ class _SignInScreenState extends State<SignInScreen> {
         showSpinner = true;
       });
       try {
-        await signIn(email, password);
-        Navigator.of(context).popUntil((route) => route.isFirst);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
+        String? deviceToken = await FirebaseMessaging.instance.getToken();
+
+        if (deviceToken != null) {
+          await signIn(email, password, deviceToken);
+
+          Navigator.of(context).popUntil((route) => route.isFirst);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        } else {
+          setState(() {
+            errorMessage = 'Can~t get Device token';
+          });
+        }
       } catch (e) {
-        // setState(() {
-        //   errorMessage = e.toString();
-        // });
+        setState(() {
+          errorMessage = e.toString();
+        });
       } finally {
         setState(() {
           showSpinner = false;
@@ -50,11 +60,20 @@ class _SignInScreenState extends State<SignInScreen> {
         spacing: 100,
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+
           Flexible(
             flex: 1,
+
             child: Hero(
               tag: 'logo',
-              child: Image.network("https://picsum.photos/200", height: 80),
+              child:
+              Image.asset(
+                'assets/images/logo3.png',
+
+                fit: BoxFit.contain,
+
+              ),
+
             ),
           ),
 
@@ -63,14 +82,14 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
               ),
               child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.symmetric(vertical: 30),
                     child: Text(
                       "Sign In",
@@ -146,9 +165,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: kPrimaryColor,
                                     foregroundColor: Colors.white,
-                                    minimumSize: Size.fromHeight(40),
+                                    minimumSize: const Size.fromHeight(40),
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     "Sign In",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -162,10 +181,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ],
+               ),
               ),
-            ),
           ),
-        ],
+           ],
       ),
     );
   }

@@ -14,12 +14,17 @@ Future<String?> getUserToken() async {
   return prefs.getString(userTokenCacheKey);
 }
 
-Future<dynamic> signIn(String email, String password) async {
+Future<dynamic> signIn(String email, String password, String deviceToken) async {
   final response = await http.post(
     parseEndpoint('/client/login'),
-    body: {'email': email, 'password': password},
+    body: {
+      'email': email,
+      'password': password,
+      'device_token': deviceToken,
+    },
     headers: {'Accept': 'application/json'},
   );
+
   final data = processResponse(response);
   await saveUserToken(data['token']);
   return data;

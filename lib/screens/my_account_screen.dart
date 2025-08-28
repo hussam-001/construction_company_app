@@ -30,11 +30,17 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Flexible(
+
+          Expanded(
             flex: 1,
-            child: Hero(
-              tag: 'logo',
-              child: Image.network("https://picsum.photos/200", height: 200),
+            child: Center(
+              child: Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/logo3.png',
+                 height: 200,
+                ),
+              ),
             ),
           ),
 
