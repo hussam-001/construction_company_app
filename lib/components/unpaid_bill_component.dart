@@ -74,7 +74,7 @@ class UnPaidBillComponent extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${bill["due_date"]}",
+                        "${bill["due_date"].substring(0, 10)}",
                         style: TextStyle(fontSize: 18, color: kDangerColor),
                       ),
                       Text(

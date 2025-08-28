@@ -19,10 +19,6 @@ void main() async {
   await Stripe.instance.applySettings();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await FirebaseMessaging.instance.requestPermission();
-  final fcmToken = await FirebaseMessaging.instance.getToken();
-  print("🔔🔔🔔🔔");
-  print(fcmToken);
   runApp(const MyApp());
 }
 
@@ -36,7 +32,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
         appBarTheme: AppBarTheme(
           centerTitle: true,

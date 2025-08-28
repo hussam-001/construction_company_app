@@ -25,6 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
         showSpinner = true;
       });
       try {
+        await FirebaseMessaging.instance.requestPermission();
         String? deviceToken = await FirebaseMessaging.instance.getToken();
 
         if (deviceToken != null) {

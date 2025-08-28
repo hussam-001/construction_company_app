@@ -57,6 +57,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
               style: CardFormStyle(
                 cursorColor: kPrimaryColor,
                 placeholderColor: Colors.grey,
+                borderColor: Colors.grey,
+                textColor: Colors.black,
               ),
               onCardChanged: (card) {
                 setState(() {
