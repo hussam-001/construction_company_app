@@ -1,5 +1,5 @@
-import 'package:construction_company_app/api/auth_api.dart'; // تأكد من أن هذا المسار صحيح
-import 'package:construction_company_app/constants.dart'; // للوصول إلى الألوان
+import 'package:construction_company_app/api/auth_api.dart';
+import 'package:construction_company_app/constants.dart';
 import 'package:flutter/material.dart';
 import '../api/notification.dart';
 
